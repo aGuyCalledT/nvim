@@ -1,0 +1,5 @@
+require("plugins.catppuccin")
+require("plugins.treesitter")
+require("plugins.mason")
+require("plugins.telescope")
+require("plugins.alpha")
