@@ -4,7 +4,9 @@ local runner = require("core.run")
 vim.g.mapleader = " "
 
 -- general
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "open netrw file explorer" })
+
+vim.keymap.set('n', '<leader>pv', ':NvimTreeToggle<CR>', { silent = true })
+-- vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "open netrw file explorer" })
 vim.keymap.set("n", "<leader><Esc>", ":Alpha<CR>", { silent = true, desc = "back to dashboard" })
 
 -- run
@@ -19,9 +21,8 @@ vim.api.nvim_create_autocmd("TermOpen", {
     end,
 })
 
-vim.keymap.set('n', '<leader>rp', function()
-    require('core.run').run_current_file()
-end, { desc = "run current file" })
+local run = require("core.run")
+vim.keymap.set('n', '<leader>rp', run.run_current_file, { desc = "run current file" })
 
 -- telescope
 local builtin = require("telescope.builtin")

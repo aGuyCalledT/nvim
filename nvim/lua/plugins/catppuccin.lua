@@ -55,21 +55,26 @@ require("catppuccin").setup({
     color_overrides = {},
     custom_highlights = function(colors)
         return {
-            NormalFloat = { bg = colors.surface1 },
-            FloatBorder = { bg = colors.surface1, fg = colors.surface1 },
+            DiagnosticSignError = { fg = colors.red },
+            DiagnosticSignWarn  = { fg = colors.yellow },
+            DiagnosticSignHint  = { fg = colors.blue },
+            DiagnosticSignInfo  = { fg = colors.green },
 
-            Pmenu = { bg = colors.mantle },
-            PmenuSel = { bg = colors.lavender, fg = colors.base, blend = 0, bold = true },
-            PmenuSbar = { bg = colors.surface0 },
-            PmenuThumb = { bg = colors.surface2 },
-            CursorLine = { bg = colors.surface0, blend = 0 },
+            NormalFloat         = { bg = colors.surface1 },
+            FloatBorder         = { bg = colors.surface1, fg = colors.surface1 },
 
-            Visual = { bg = colors.surface2, fg = colors.text, bold = true },
-            Search = { bg = colors.surface2, fg = colors.text },
-            IncSearch = { bg = colors.lavender, fg = colors.base },
-            CurSearch = { bg = colors.lavender, fg = colors.base },
+            Pmenu               = { bg = colors.mantle },
+            PmenuSel            = { bg = colors.lavender, fg = colors.base, blend = 0, bold = true },
+            PmenuSbar           = { bg = colors.surface0 },
+            PmenuThumb          = { bg = colors.surface2 },
+            CursorLine          = { bg = colors.surface0 },
 
-            CursorLineNr = { fg = colors.text, bold = true },
+            Visual              = { bg = colors.surface2, fg = colors.text, bold = true },
+            Search              = { bg = colors.surface0, fg = colors.text },
+            IncSearch           = { bg = colors.lavender, fg = colors.base },
+            CurSearch           = { bg = colors.lavender, fg = colors.base },
+
+            CursorLineNr        = { fg = colors.lavender, bold = true },
         }
     end,
     default_integrations = true,
@@ -78,7 +83,10 @@ require("catppuccin").setup({
         cmp = true,
         gitsigns = true,
         nvimtree = true,
-        notify = false,
+        notify = true,
+        native_lsp = {
+            enabled = false,
+        },
         mini = {
             enabled = true,
             indentscope_color = "",

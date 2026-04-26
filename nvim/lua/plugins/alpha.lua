@@ -1,9 +1,11 @@
 local alpha = require("alpha")
 local dashboard = require("alpha.themes.dashboard")
+local raw_version = vim.version()
+local version = string.format(" v%d.%d.%d", raw_version.major, raw_version.minor, raw_version.patch)
 
 local function sync_colors()
-    vim.api.nvim_set_hl(0, "AlphaHeaderCol", { fg = vim.g.terminal_color_2 or "#a6da95", bg = "NONE", bold = true })
-    vim.api.nvim_set_hl(0, "AlphaFooterCol", { fg = vim.g.terminal_color_15 or "#6e738d", bg = "NONE" })
+    vim.api.nvim_set_hl(0, "footerColor", { fg = vim.g.terminal_color_15 or "#cad3f5", bg = "NONE" })
+    vim.api.nvim_set_hl(0, "headerColor", { fg = vim.g.terminal_color_2 or "#cad3f5", bg = "NONE" })
 end
 
 vim.api.nvim_create_autocmd("ColorScheme", {
@@ -14,21 +16,12 @@ sync_colors()
 
 dashboard.section.header.val = {
     [[]], [[]], [[]],
-    [[          .          .          ]],
-    [[        ';;,.        ::'        ]],
-    [[      ,:::;,,        :ccc,      ]],
-    [[     ,::c::,,,,.     :cccc,     ]],
-    [[     ,cccc:;;;;;.    cllll,     ]],
-    [[     ,cccc;.;;;;;,   cllll;     ]],
-    [[     :cccc; .;;;;;;. coooo;     ]],
-    [[     ;llll;   ,:::::'loooo;     ]],
-    [[     ;llll:    ':::::loooo:     ]],
-    [[     :oooo:     .::::llodd:     ]],
-    [[     .;ooo:       ;cclooo:.     ]],
-    [[       .;oc         'coo;.      ]],
-    [[         .'           .,.       ]],
+    [[]], [[]], [[]],
+    [[╭───────────────────────── Nvim ─────────────────────────╮]],
+    [[│                      welcome back T!                   │]],
+    [[╰────────────────────────────────────────────────────────╯]],
 }
-dashboard.section.header.opts.hl = "AlphaHeaderCol"
+dashboard.section.header.opts.hl = "headerColor"
 
 local function get_last_file()
     pcall(vim.cmd, "rshada!")
@@ -67,9 +60,24 @@ dashboard.section.footer.val = (function()
         "ls -1 ~/.local/share/nvim/site/pack/packer/start ~/.local/share/nvim/site/pack/packer/opt 2>/dev/null | wc -l")
     local count = handle:read("*a"):gsub("%s+", "")
     handle:close()
-    return os.date("󰃭 %d.%m.%Y") .. "   " .. count .. " plugins"
-end)()
-dashboard.section.footer.opts.hl = "AlphaFooterCol"
 
--- 6. Setup
+    local date_text = os.date("%d.%m.%Y")
+    local plugins_text = count .. " plugins"
+    local content = string.format("󰃭 %s  |   %s  |  %s", date_text, plugins_text, version)
+
+    local width = 54
+    local padding = string.rep(" ", math.floor((width - #content + 6) / 2))
+
+    local line = "│" .. padding .. content
+    line = line .. string.rep(" ", 58 - #line + 7) .. "│"
+
+    return {
+        [[]],
+        [[╭───────────────────────────────────────────────────────╮]],
+        line,
+        [[╰───────────────────────────────────────────────────────╯]],
+    }
+end)()
+dashboard.section.footer.opts.hl = "footerColor"
+
 alpha.setup(dashboard.config)

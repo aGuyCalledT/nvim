@@ -58,4 +58,25 @@ return require('packer').startup(function(use)
             require("plugins.alpha")
         end
     }
+
+    use {
+        "tpope/vim-dadbod",
+        requires = {
+            "kristijanhusak/vim-dadbod-ui",
+            "kristijanhusak/vim-dadbod-completion",
+            "tpope/vim-dotenv",
+            "nanotee/sqls.nvim"
+        },
+    }
+
+    use {
+        "rcarriga/nvim-notify",
+    }
+
+    use {
+        'nvim-tree/nvim-tree.lua',
+        requires = {
+            'nvim-tree/nvim-web-devicons',
+        },
+    }
 end)

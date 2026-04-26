@@ -45,7 +45,7 @@ vim.opt.backup = false
 
 vim.opt.fileencoding = "utf-8"
 vim.opt.pumheight = 10
-vim.opt.cmdheight = 0
+vim.opt.cmdheight = 2
 vim.opt.iskeyword:append("-")
 
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -56,5 +56,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 require("core.remaps")
-require("core.netrw")
+require("core.nvim_tree")
 require("core.run")
+require("core.lsp")

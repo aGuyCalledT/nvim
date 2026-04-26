@@ -84,20 +84,9 @@ cmp.setup({
     })
 })
 
-vim.diagnostic.config({
-    virtual_text = false,
-    underline = true,
-    update_in_insert = false,
-    severity_sort = true,
-    signs = true,
-    float = {
-        focusable = true,
-        style = "minimal",
-        border = "rounded",
-        source = "always",
-        header = "",
-        prefix = function(diagnostic, i, total)
-            return tostring(i) .. ": "
-        end,
+cmp.setup.filetype({ "sql", "mysql", "plsql" }, {
+    sources = {
+        { name = "vim-dadbod-completion" },
+        { name = "buffer" },
     },
 })
