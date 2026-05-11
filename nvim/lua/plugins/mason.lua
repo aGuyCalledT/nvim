@@ -22,7 +22,6 @@ local capabilities = vim.tbl_deep_extend(
     cmp_lsp.default_capabilities()
 )
 
-require("fidget").setup({})
 require("mason").setup()
 require("mason-lspconfig").setup({
     ensure_installed = {

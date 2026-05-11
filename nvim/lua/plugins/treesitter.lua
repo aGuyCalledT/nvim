@@ -4,9 +4,9 @@ if not status then
 end
 
 ts.setup({
-    ensure_installed = { 
-        "lua", "vim", "vimdoc", "javascript", "typescript", 
-        "html", "css", "json", "python", "bash", "go", "java" 
+    ensure_installed = {
+        "lua", "vim", "vimdoc", "javascript", "typescript",
+        "html", "css", "json", "python", "bash", "go", "java"
     },
     sync_install = false,
     highlight = {
